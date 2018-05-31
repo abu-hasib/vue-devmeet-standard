@@ -12,10 +12,12 @@
       <v-flex xs12>
         <v-carousel>
           <v-carousel-item
-          v-for="(slide, id) in slides"
+          v-for="slide in slides"
           :src="slide.src"
-          :key="id">
-          <div class="title text-xs-center">
+          :key="slide.id"
+          @click="onLoadMeetup(slide.id)"
+          >
+          <div @click="onLoadMeetup(slide.id)" class="title text-xs-center" style="cursor: pointer">
             {{ slide.title }}
           </div>
           </v-carousel-item>
@@ -25,6 +27,7 @@
     <v-layout row wrap class="mt-2">
       <v-flex xs12 class="text-xs-center">
         <p>Join our awesome meetups!</p>
+        <v-btn ></v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -37,7 +40,7 @@ export default {
       slides: [
         {
           src: 'https://www.maxpixel.net/static/photo/1x/Islam-National-Museum-Saudi-Arabia-Riad-Arabia-2376472.jpg',
-          id: 'nfof23hbhek',
+          id: '1',
           title: 'Meetup in Madina'
         },
         {
@@ -46,6 +49,13 @@ export default {
           title: 'Meetup in Riyadh'
         }
       ]
+    }
+  },
+  methods: {
+    onLoadMeetup (id) {
+      console.log(id)
+      console.log('onLoadMeetup CLicked ', id)
+      this.$router.push('/meetups/' + id)
     }
   }
 }
