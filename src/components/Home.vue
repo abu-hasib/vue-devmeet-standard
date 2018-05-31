@@ -27,7 +27,6 @@
     <v-layout row wrap class="mt-2">
       <v-flex xs12 class="text-xs-center">
         <p>Join our awesome meetups!</p>
-        <v-btn ></v-btn>
       </v-flex>
     </v-layout>
   </v-container>
@@ -35,20 +34,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      slides: [
-        {
-          src: 'https://www.maxpixel.net/static/photo/1x/Islam-National-Museum-Saudi-Arabia-Riad-Arabia-2376472.jpg',
-          id: '1',
-          title: 'Meetup in Madina'
-        },
-        {
-          src: 'https://cdn.pixabay.com/photo/2017/04/03/04/48/riyadh-2197496_960_720.jpg',
-          id: 'dhi399und003',
-          title: 'Meetup in Riyadh'
-        }
-      ]
+  computed: {
+    slides () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {
