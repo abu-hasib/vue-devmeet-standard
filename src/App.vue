@@ -10,10 +10,8 @@
       <v-toolbar-items
         v-for="item in menuItems"
         :key="item.title"
-
         class="hidden-xs-only">
         <v-btn
-          router
           :to="item.link"
           flat>
           <v-icon left>{{ item.icon }}</v-icon> {{ item.title }}
@@ -31,7 +29,6 @@
         <v-list-tile
           v-for="item in menuItems"
           :key="item.title"
-          router
           :to="item.link">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -56,11 +53,21 @@ export default {
   data () {
     return {
       menuItems: [
-        {icon: 'supervisor_account', title: 'Meetups', link: '/meetups'},
-        {icon: 'explore', title: 'Organize', link: '/meetups/new'},
-        {icon: 'perm_identity', title: 'Profile', link: '/profile'},
-        {icon: 'vpn_key', title: 'Sign up', link: '/signup'},
-        {icon: 'lock_open', title: 'Sign in', link: 'signin'}
+        {
+          icon: 'supervisor_account', title: 'Meetups', link: '/meetups'
+        },
+        {
+          icon: 'explore', title: 'Organize', link: '/meetup/new'
+        },
+        {
+          icon: 'perm_identity', title: 'Profile', link: '/profile'
+        },
+        {
+          icon: 'vpn_key', title: 'Sign up', link: '/signup'
+        },
+        {
+          icon: 'lock_open', title: 'Sign in', link: 'signin'
+        }
       ],
       drawer: null
     }
