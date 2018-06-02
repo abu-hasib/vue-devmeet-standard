@@ -15,7 +15,7 @@ export const store = new Vuex.Store({
       },
       {
         src:
-          'https://cdn.pixabay.com/photo/2017/04/03/04/48/riyadh-2197496_960_720.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Jackson_Hall%2C_Kentucky_State_University.JPG/800px-Jackson_Hall%2C_Kentucky_State_University.JPG',
         id: 'dhi399und003',
         title: 'Meetup in Riyadh',
         date: '2018-06-7'
@@ -26,8 +26,24 @@ export const store = new Vuex.Store({
       registeredMeetups: ['1178dkkkdkd']
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createMeetup (state, payload) {
+      state.loadedMeetUpSlides.push(payload)
+    }
+  },
+  actions: {
+    createMeetup ({commit}, payload) {
+      const meetup = {
+        title: payload.title,
+        src: payload.src,
+        location: payload.location,
+        description: payload.description,
+        date: new Date(),
+        id: 'fnokjdkpdpl223'
+      }
+      commit('createMeetup', meetup)
+    }
+  },
   getters: {
     loadedMeetups (state) {
       return state.loadedMeetUpSlides.sort((meetupA, meetupB) => {
