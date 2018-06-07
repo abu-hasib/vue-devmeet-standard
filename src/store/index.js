@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
           'https://www.maxpixel.net/static/photo/1x/Islam-National-Museum-Saudi-Arabia-Riad-Arabia-2376472.jpg',
         id: '1178dkkkdkd',
         title: 'Meetup in Madina',
-        date: '2018-06-10',
+        date: new Date(),
         location: 'Madina',
         description: 'Simply awesome'
       },
@@ -20,7 +20,7 @@ export const store = new Vuex.Store({
           'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Jackson_Hall%2C_Kentucky_State_University.JPG/800px-Jackson_Hall%2C_Kentucky_State_University.JPG',
         id: 'dhi399und003',
         title: 'Meetup in Riyadh',
-        date: '2018-06-7',
+        date: new Date(),
         location: 'Riyadh',
         description: 'Yes to road trip!'
       }

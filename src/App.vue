@@ -1,7 +1,7 @@
 <template>
   <v-app>
 
-    <v-toolbar class="teal accent-3">
+    <v-toolbar class="primary">
       <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-sm-and-up"></v-toolbar-side-icon>
         <v-toolbar-title>
           <router-link to="/" tag="span" style="cursor: pointer">Hangouts</router-link>

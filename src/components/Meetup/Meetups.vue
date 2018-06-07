@@ -17,7 +17,7 @@
                                 <v-card-title primary-title>
                                     <div>
                                         <div class="headline white--text">{{ meetup.title }}</div>
-                                        <div>{{ meetup.date }}</div>
+                                        <div>{{ meetup.date | date }}</div>
                                     </div>
                                 </v-card-title>
                                 <v-actions>
