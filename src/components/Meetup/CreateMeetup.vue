@@ -41,19 +41,16 @@
           ></v-text-field>
           <v-layout row mb-2>
             <v-flex xs12 class="text-md-left text-xs-center">
-              <h2>Choose a Date and Time</h2>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm3 mb-2 offset-xs1 offset-lg0>
               <v-date-picker v-model="date"></v-date-picker>
-              <p> {{date}} </p>
             </v-flex>
           </v-layout>
           <v-layout row>
             <v-flex xs12 sm3 mb-2 offset-xs1 offset-lg0>
               <v-time-picker v-model="time" format="24hr"></v-time-picker>
-              <p> {{time}} </p>              
             </v-flex>
           </v-layout>
           <v-layout row>
@@ -62,7 +59,6 @@
               class="primary" 
               :disabled="!formIsValid"
               type="submit">Create Meetup</v-btn>
-              {{meetupSchedule}}
             </v-flex>
           </v-layout>
         </v-form>
