@@ -2,6 +2,11 @@
  <v-container>
    <v-layout row>
      <v-flex xs12 sm6 offset-sm3>
+       <app-alert @dismissed="onDismissed" v-if="error" :text="error.message"></app-alert>
+     </v-flex>
+   </v-layout>
+   <v-layout row>
+     <v-flex xs12 sm6 offset-sm3>
        <v-card>
          <v-card-text>
            <v-container>
@@ -42,7 +47,14 @@
                 </v-layout>
                 <v-layout>
                   <v-flex xs12>
-                     <v-btn type="submit">Sign up</v-btn>
+                    <v-btn type="submit"
+                    :disabled="loading"
+                    :loading="loading">
+                       Sign up
+                       <span slot="loader" class="custom-loader">
+                        <v-icon light>cached</v-icon>
+                      </span>
+                    </v-btn>
                   </v-flex>
                 </v-layout>
               </form>
@@ -69,6 +81,12 @@ export default {
     },
     user () {
       return this.$store.getters.user
+    },
+    error () {
+      return this.$store.getters.error
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   watch: {
@@ -82,6 +100,9 @@ export default {
     onSignup () {
       // use Vuex
       this.$store.dispatch('signUserUp', {email: this.email, password: this.password})
+    },
+    onDismissed () {
+      this.$store.dispatch('clearError')
     }
   }
 }
