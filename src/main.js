@@ -9,6 +9,7 @@ import * as firebase from 'firebase'
 import { store } from './store'
 import DateFilter from './filters/date'
 import AlertComp from './components/Shared/Alert.vue'
+// import styles from './stylus/main.styl'
 
 Vue.use(Vuetify, { theme: {
   primary: '#4fc08d',
@@ -39,5 +40,6 @@ new Vue({
       projectId: 'vue-devmeet-standard',
       storageBucket: 'vue-devmeet-standard.appspot.com'
     })
+    this.$store.dispatch('loadMeetups')
   }
 })

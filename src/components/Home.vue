@@ -8,7 +8,12 @@
         <v-btn large router to="/meetups/new" class="primary"> Organize Meetups </v-btn>
       </v-flex>
     </v-layout>
-    <v-layout row wrap class="mt-2">
+    <v-layout row>
+      <v-flex xs12>
+         <v-progress-circular :size="70" :width="7" indeterminate color="purple" v-if="loading"></v-progress-circular>
+      </v-flex>
+    </v-layout>
+    <v-layout row wrap class="mt-2" v-if="!loading">
       <v-flex xs12>
         <v-carousel>
           <v-carousel-item
@@ -37,6 +42,9 @@ export default {
   computed: {
     slides () {
       return this.$store.getters.featuredMeetups
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   methods: {
