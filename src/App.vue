@@ -7,14 +7,21 @@
           <router-link to="/" tag="span" style="cursor: pointer">Hangouts</router-link>
         </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items
+      <v-toolbar-items>
+        <v-btn
         v-for="item in menuItems"
         :key="item.title"
-        class="hidden-xs-only">
-        <v-btn
-          :to="item.link"
-          flat>
+        class="hidden-xs-only"
+        :to="item.link"
+        flat>
           <v-icon left>{{ item.icon }}</v-icon> {{ item.title }}
+        </v-btn>
+        <v-btn 
+        v-if="isAuthenticated"
+        class="hidden-xs-only"
+        flat
+        @click="logout">
+          <v-icon left>exit_to_app</v-icon> Logout
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
@@ -35,6 +42,15 @@
           </v-list-tile-action>
           <v-list-tile-content>
           <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile
+        @click="logout">
+          <v-list-tile-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+          <v-list-tile-title>Logout</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -82,6 +98,11 @@ export default {
     },
     isAuthenticated () {
       return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+    }
+  },
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
     }
   },
   name: 'App'
