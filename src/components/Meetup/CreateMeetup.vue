@@ -21,14 +21,25 @@
           id="location"
           required
           ></v-text-field>
-          <v-text-field
-          v-model="src"
-          label="Image URL"
-          id="src"
-          required
-          ></v-text-field>
+          <v-btn
+            :loading="loading3"
+            :disabled="loading3"
+            color="blue-grey"
+            class="white--text"
+            @click="onPickFile">
+            Upload
+            <v-icon right dark>cloud_upload</v-icon>
+          </v-btn>
+          <input 
+          type="file" 
+          name="" 
+          id="" 
+          style="display: none" 
+          ref="inputFile" 
+          accept="image/*"
+          @change="onFilePicked">
           <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
+            <v-flex xs12 sm6 mt-4>
               <img :src="src" alt="" height="180px">
             </v-flex>
           </v-layout>
@@ -76,7 +87,8 @@ export default {
       src: '',
       description: '',
       date: null, // always set date to null
-      time: new Date()
+      time: new Date(),
+      image: null
     }
   },
   computed: {
@@ -104,15 +116,34 @@ export default {
       if (!this.formIsValid) {
         return
       }
+      if (!this.image) {
+        return
+      }
       const meetupData = {
         title: this.title,
-        src: this.src,
+        src: this.image,
         location: this.location,
         description: this.description,
         date: this.meetupSchedule
       }
       this.$store.dispatch('createMeetup', meetupData)
       this.$router.push('/meetups')
+    },
+    onPickFile () {
+      this.$refs.inputFile.click()
+    },
+    onFilePicked (event) {
+      const files = event.target.files
+      let filename = files[0].name
+      if (filename.lastIndexOf('.') <= 0) {
+        return alert('Please add a vaild file!')
+      }
+      const fileReader = new FileReader()
+      fileReader.addEventListener('load', () => {
+        this.src = fileReader.result
+      })
+      fileReader.readAsDataURL(files[0])
+      this.image = files[0]
     }
   }
 }
