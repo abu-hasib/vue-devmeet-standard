@@ -34,6 +34,23 @@ export const store = new Vuex.Store({
     createMeetup (state, payload) {
       state.loadedMeetUpSlides.push(payload)
     },
+    updateMeetup (state, payload) {
+      const meetup = state.loadedMeetUpSlides.find(meetup => {
+        return meetup.id === payload.id
+      })
+      if (payload.title) {
+        meetup.title = payload.title
+      }
+      if (payload.description) {
+        meetup.description = payload.description
+      }
+      if (payload.date) {
+        meetup.date = payload.date
+      }
+      if (payload.location) {
+        meetup.location = payload.location
+      }
+    },
     setLoadedMeetups (state, payload) {
       state.loadedMeetUpSlides = payload
     },
@@ -60,11 +77,13 @@ export const store = new Vuex.Store({
         const obj = meetup.val()
         for (let key in obj) {
           meetups.push({
-            id: obj[key].creatorId,
+            id: key,
             title: obj[key].title,
             description: obj[key].description,
             src: obj[key].imageUrl,
-            date: obj[key].date
+            location: obj[key].location,
+            date: obj[key].date,
+            creatorId: obj[key].creatorId
           })
         }
         commit('setLoadedMeetups', meetups)
@@ -112,6 +131,27 @@ export const store = new Vuex.Store({
       })
       .catch((err) => {
         console.log(err)
+      })
+    },
+    updateMeetupData ({commit}, payload) {
+      commit('setLoading', true)
+      const updateObj = {}
+      if (payload.title) {
+        updateObj.title = payload.title
+      }
+      if (payload.description) {
+        updateObj.description = payload.description
+      }
+      if (payload.location) {
+        updateObj.location = payload.location
+      }
+      firebase.database().ref('meetups').child(payload.id).update(updateObj)
+      .then(() => {
+        commit('setLoading', false)
+        commit('updateMeetup', payload)
+      }).catch(error => {
+        console.error(error)
+        commit('setLoading', false)
       })
     },
     signUserUp ({commit}, payload) {
