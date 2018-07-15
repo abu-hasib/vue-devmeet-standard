@@ -23,7 +23,7 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn class="success">Register</v-btn>
+                            <register-meetup-dialog :meetupId="meetup.id"></register-meetup-dialog>
                         </v-card-actions>
                 </v-card>
             </v-flex>
