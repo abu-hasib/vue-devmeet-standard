@@ -1,10 +1,10 @@
 <template>
     <v-container>
-        <!-- <v-layout v-if="loading">
-            <v-flex xs12>
-                <v-progress-circular :size="70" :width="7" indeterminate color="purple" v-if="loading"></v-progress-circular>
-            </v-flex>
-        </v-layout> -->
+      <v-layout v-if="loading"  row>
+          <v-flex xs12>
+              <v-progress-circular :size="70" :width="7" indeterminate color="purple" v-if="loading"></v-progress-circular>
+          </v-flex>
+      </v-layout>
         <v-layout>
             <v-flex>
                 <v-card>
@@ -23,7 +23,7 @@
                         </v-card-text>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <register-meetup-dialog :meetupId="meetup.id"></register-meetup-dialog>
+                            <register-meetup-dialog :meetupId="meetup.id" v-if="userIsAuthenticated && !userIsCreator"></register-meetup-dialog>
                         </v-card-actions>
                 </v-card>
             </v-flex>
