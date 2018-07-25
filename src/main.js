@@ -15,13 +15,16 @@ import RegisterMeetupDialog from './components/Registration/RegisterMeetupDialog
 
 Vue.use(Vuetify, { theme: {
   primary: '#4fc08d',
-  secondary: '#424242',
+  secondary: '#494949',
   accent: '#82B1FF',
   error: '#FF5252',
   info: '#2196F3',
   success: '#4CAF50',
-  warning: '#FFC107'
-}})
+  warning: '#FFC107',
+  blacky: '#000000'
+},
+  iconfont: 'md' || 'mdi' || 'fa' || 'fa4'
+})
 
 Vue.config.productionTip = false
 Vue.filter('date', DateFilter)

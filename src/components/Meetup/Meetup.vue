@@ -1,33 +1,34 @@
 <template>
     <v-container>
-      <v-layout v-if="loading"  row>
-          <v-flex xs12>
-              <v-progress-circular :size="70" :width="7" indeterminate color="purple" v-if="loading"></v-progress-circular>
-          </v-flex>
+      <v-layout row wrap>
+        <v-flex xs12>
+          <v-progress-circular :size="70" :width="7" indeterminate color="purple" v-if="loading"></v-progress-circular>
+        </v-flex>
       </v-layout>
-        <v-layout>
-            <v-flex>
-                <v-card>
-                    <v-card-title primary-title>
-                        <div class="headline">{{ meetup.title }}</div>
-                        <v-spacer></v-spacer>
-                        <edit-meetup-dialog v-if="userIsCreator" :meetup="meetup"></edit-meetup-dialog>
-                    </v-card-title>
-                        <v-card-media
-                        :src="meetup.src"
-                        height="400px">
-                        </v-card-media>
-                        <v-card-text>
-                            <div class="info--text">{{ meetup.date | date }} - {{ meetup.location }}</div>
-                            <div>{{ meetup.description }}</div>
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <register-meetup-dialog :meetupId="meetup.id" v-if="userIsAuthenticated && !userIsCreator"></register-meetup-dialog>
-                        </v-card-actions>
-                </v-card>
-            </v-flex>
-        </v-layout>
+
+      <v-layout>
+        <v-flex>
+          <v-card v-if="!loading">
+            <v-card-title primary-title>
+              <div class="headline">{{ meetup.title }}</div>
+              <v-spacer></v-spacer>
+              <edit-meetup-dialog v-if="userIsCreator" :meetup="meetup"></edit-meetup-dialog>
+            </v-card-title>
+            <v-card-media
+            :src="meetup.src"
+            height="400px">
+            </v-card-media>
+            <v-card-text>
+              <div class="info--text">{{ meetup.date | date }} - {{ meetup.location }}</div>
+              <div>{{ meetup.description }}</div>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <register-meetup-dialog :meetupId="meetup.id" v-if="userIsAuthenticated && !userIsCreator"></register-meetup-dialog>
+            </v-card-actions>
+        </v-card>
+        </v-flex>
+      </v-layout>
     </v-container>
 </template>
 

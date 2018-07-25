@@ -1,67 +1,73 @@
 <template>
- <v-container>
-   <v-layout row>
-     <v-flex xs12 sm6 offset-sm3>
-       <app-alert @dismissed="onDismissed" v-if="error" :text="error.message"></app-alert>
-     </v-flex>
-   </v-layout>
-   <v-layout row>
-     <v-flex xs12 sm6 offset-sm3>
-       <v-card>
-         <v-card-text>
-           <v-container>
-            <form @submit.prevent="onSignin">
-              <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                    name="email"
-                    label="Email"
-                    type="email"
-                    id="email"
-                    v-model="email"
-                    required></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout row>
-                  <v-flex xs12>
-                    <v-text-field
-                    name="password"
-                    label="Password"
-                    id="password"                    
-                    v-model="password"
-                    type="password"
-                    required></v-text-field>
-                  </v-flex>
-                </v-layout>
-                <v-layout>
-                  <v-flex xs12>
-                     <v-btn type="submit"
-                    :disabled="loading"
-                    :loading="loading">
-                       Sign in
-                       <span slot="loader" class="custom-loader">
-                        <v-icon light>cached</v-icon>
-                      </span>
-                    </v-btn>
-                  </v-flex>
-                </v-layout>
-              </form>
-           </v-container>
-         </v-card-text>
-       </v-card>
-     </v-flex>
+  <v-content>
+    
+  
+ <v-container fluid fill-height>
+
+
+   <v-layout align-center justify-center mt-5 mb-5>
+     <v-flex xs12 sm8 md4>
+      <v-layout v-if="error" row>
+        <v-flex>
+          <app-alert @dismissed="onDismissed" :text="error.message"></app-alert>
+        </v-flex>
+      </v-layout>
+    <v-card class="elevation-12" >
+      <v-toolbar dark color="primary">
+        <v-toolbar-title>Hangouts</v-toolbar-title>
+      </v-toolbar>
+
+      <v-card-text>
+        <v-form @submit.prevent="onSignin">
+          <v-text-field
+            name="email"
+            prepend-icon="person"
+            label="Email"
+            type="email"
+            id="email"
+            v-model="email"
+            required></v-text-field>
+          <v-text-field
+            name="password"
+            label="Password"
+            prepend-icon="lock"
+            id="password"                    
+            v-model="password"
+            type="password"
+            required></v-text-field>
+            <v-spacer></v-spacer>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn type="submit"
+                color="primary"
+                :disabled="loading"
+                :loading="loading">
+                Login
+                <span slot="loader" class="custom-loader">
+                  <v-icon light>cached</v-icon>
+                </span>
+              </v-btn>
+            </v-card-actions>
+        </v-form>
+        
+      </v-card-text>
+    </v-card>
+    </v-flex>
    </v-layout>
  </v-container>
+</v-content>
 </template>
 
 <script>
 export default {
-  data () {
-    return {
-      email: '',
-      password: ''
-    }
+  props: {
+    source: String
   },
+  data: () => ({
+    email: '',
+    password: '',
+    drawer: null
+  }),
   computed: {
     user () {
       return this.$store.getters.user
